@@ -61,6 +61,13 @@ public class BepInExMod : BaseUnityPlugin, IMessageDeserializer
 		}
 		
 		_renderer = manager;
+
+		if (_renderer.VROutput == null || _renderer.VROutput.CameraRoot == null) 
+		{
+			_logger.LogError( "Could not find VR camera root! Initializing failed! Did you start the game in VR?" );
+			return;
+		}
+		
 		_vrCameraRoot = _renderer.VROutput.CameraRoot;
 		
 		_currentResoniteQueueName = (string)args[0]!;
@@ -121,7 +128,12 @@ public static class QuickPatch
 {
 	public static void Postfix() 
 	{
-		BepInExMod.InitializeLate();
+		// Do not under any circumstances crash the fucking initialization
+		try {
+			BepInExMod.InitializeLate();
+		} catch (Exception) {
+			// ignored
+		}
 	}
 }
 #endif
