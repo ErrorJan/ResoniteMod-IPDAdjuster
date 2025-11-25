@@ -2,7 +2,7 @@ namespace IPDAdjuster;
 
 public static class ModInfo 
 {
-	internal const string ModVersion = "2.0.1";
+	internal const string ModVersion = "2.0.2";
 	public const string ModName = "IPD Adjuster";
 	public const string ModTitle = "ResoniteMod IPD Adjuster";
 	public const string ModAuthor = "ErrorJan";
